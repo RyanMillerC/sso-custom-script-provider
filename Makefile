@@ -2,7 +2,7 @@
 
 deploy:
 	$(MAKE) build-jar
-	oc create configmap custom-authenticator --from-file=custom-authenticator.jar
+	oc create configmap custom-authenticator --from-file=custom-authenticator.jar --namespace rhsso-operator
 	# oc create -f manifests
 
 build-jar:
