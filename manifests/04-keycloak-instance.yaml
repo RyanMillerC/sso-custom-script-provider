@@ -9,13 +9,28 @@ spec:
   externalAccess:
     enabled: true
   keycloakDeploymentSpec:
+    # This is attempt two. It doesn't work either, no obvious errors.
+    #
+    # P.S I don't like it because it relies on an external resource being
+    # available to start the pod.
+    extensions:
+      - https://git.taco.moe/lab/sso-custom-auth-flow/raw/branch/main/custom-authenticator.jar
     experimental:
-      volumes:
-        items:
-          - name: custom-authenticator
-            configMaps:
-              - custom-authenticator
-            mountPath: /deployments
+      env:
+        - name: JAVA_TOOL_OPTIONS
+          value: "-Dcom.redhat.fips=false -Dkeycloak.profile.feature.scripts=enabled"
+      # The below section isn't working because the operator is mounting the
+      # keycloak-extensions volume to /opt/eap/standalone/deployments
+      #
+      # volumes:
+      #   items:
+      #     - name: custom-authenticator
+      #       configMaps:
+      #         - custom-authenticator
+      #       mountPath: /deployments
+      #
+      #       # Also tried this
+      #       #mountPath: /opt/eap/standalone/deployments
     imagePullPolicy: Always
   postgresDeploymentSpec:
     imagePullPolicy: Always
