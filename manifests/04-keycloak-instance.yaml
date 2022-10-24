@@ -9,6 +9,13 @@ spec:
   externalAccess:
     enabled: true
   keycloakDeploymentSpec:
+    experimental:
+      volumes:
+        items:
+          - name: custom-authenticator
+            configMaps:
+              - custom-authenticator
+            mountPath: /deployments
     imagePullPolicy: Always
   postgresDeploymentSpec:
     imagePullPolicy: Always
