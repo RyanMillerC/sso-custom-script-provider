@@ -1,0 +1,9 @@
+{
+    "authenticators": [
+        {
+            "name": "Custom Authenticator",
+            "fileName": "custom-authenticator.js",
+            "description": "Custom authenticator from mounted JAR file"
+        }
+    ]
+}
